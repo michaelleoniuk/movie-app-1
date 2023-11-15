@@ -1,0 +1,12 @@
+URL: /
+Timestamp: Tue Nov 14 2023 23:15:12 GMT+0100 (czas środkowoeuropejski standardowy)
+
+URL: /favicon.ico
+Timestamp: Tue Nov 14 2023 23:15:12 GMT+0100 (czas środkowoeuropejski standardowy)
+
+URL: /index.html
+Timestamp: Tue Nov 14 2023 23:15:31 GMT+0100 (czas środkowoeuropejski standardowy)
+
+URL: /favicon.ico
+Timestamp: Tue Nov 14 2023 23:15:31 GMT+0100 (czas środkowoeuropejski standardowy)
+
