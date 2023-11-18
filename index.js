@@ -3,6 +3,21 @@ const express = require("express");
 
   const app = express();
 
+  const bodyParser = require('body-parser'),
+  methodOverride = require('method-override');
+
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+app.use(bodyParser.json());
+app.use(methodOverride());
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+
   app.use(morgan('common'));
 
 let topMovies = [
@@ -60,6 +75,8 @@ let requestTime = (req, res, next) => {
 
 app.use(myLogger);
 app.use(requestTime);
+
+app.use(express.static('public'));
 
 // GET requests
 app.get('/', (req, res) => {
