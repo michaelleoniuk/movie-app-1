@@ -1,1 +1,133 @@
-Here I will place an info about my App for other developers.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>myFlix API Documentation</title>
+</head>
+<body>
+  <h2>
+    The purpose of this document is to present how to use myFlix API
+  </h2>
+  
+  <h3>myFlix API - what is it?</h3>
+  
+  <div>
+  <p>myFlix API will provide users with access to information about different
+    movies, directors, and genres. Users will be able to sign up, update their
+    personal information, and create a list of their favorite movies.
+  </p>
+</div>
+<div>
+<ul>
+  <li>What information could the user want to receive (or GET) from the server?</li>
+  <li>What information could the user want to add (or POST)?</li>
+  <li>What information could the user want to update (PUT)?</li>
+  <li>What information could the user want to remove (DELETE)?</li>
+</ul>
+<h3>What user can do with myFlix</h3>
+<ol>
+  <li>Return a list of ALL movies to the user;</li>
+  <li>Return data (description, genre, director, image URL, whether it is featured or not) about a single movie by title to the user;</li>
+  <li>Return data about a genre (description) by name/title (e.g., “Thriller”);</li>
+  <li>Return data about a director (bio, birth year, death year) by name;</li>
+  <li>Allow new users to register;</li>
+  <li>Allow users to update their user info (username);</li>
+  <li>Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later);</li>
+  <li>Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later);</li>
+  <li>Allow existing users to deregister (showing only a text that a user email has been removed—more on this later).</li>
+</ol>
+</div>
+
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th class="col-2">Request</th>
+        <th class="col-1">URL</th>
+        <th class="col-1">HTTP Method</th>
+        <th class="col-3">Request body data format</th>
+        <th class="col-5">Response body data format</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Return a list of ALL movies to the user</td>
+        <td>/movies</td>
+        <td>GET</td>
+        <td>none</td>
+        <td>A JSON object holding an array with all movies.</td>
+      </tr>
+      <tr>
+        <td>Get data about a single movie by title</td>
+        <td>/movies/:title</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>A JSON object holding data about a single movie, containing description, genre, director, image URL, and
+          whether it’s featured or not property. 
+        </td>
+      </tr>
+      <tr>
+        <td>Get data about a genre by genre's name</td>
+        <td>/movies/genre/:genreName</td>
+        <td>GET</td>
+        <td>none</td>
+        <td>A JSON object holding data about a genre containing name and description properties. 
+        </td>
+      </tr>
+      <tr>
+        <td>Get data about a director by director's name</td>
+        <td>/movies/directors/:directorName</td>
+        <td>GET</td>
+        <td>none</td>
+        <td>A JSON object holding data about a director. 
+        </td>
+      </tr>
+      <tr>
+        <td>Add a new user</td>
+        <td>/users</td>
+        <td>POST</td>
+        <td>A JSON object holding user data.
+        </td>
+        <td>A JSON object holding user data plus an ID and a array for placing favorite movie.
+        </td>
+      </tr>
+      <tr>
+        <td>Update user info</td>
+        <td>/users/:id</td>
+        <td>PUT</td>
+        <td>A JSON object holding the user info that should be changed.
+        </td>
+        <td>A JSON object holding all user info with all key/values pair updated.
+        </td>
+      </tr>
+      <tr>
+        <td>Add a movie to user favorite list</td>
+        <td>/users/:id/:movieTitle</td>
+        <td>POST</td>
+        <td>None</td>
+        <td>A JSON object holding all user info with all key/values pair updated.
+        </td>
+      </tr>
+      <tr>
+        <td>Remove a movie from user favorite list</td>
+        <td>/users/:id/:movieTitle</td>
+        <td>DELETE</td>
+        <td>None</td>
+        <td>A JSON object holding all user info with all key/values pair updated.
+        </td>
+      </tr>
+      <tr>
+        <td>Delete a user</td>
+        <td>/users/:id</td>
+        <td>DELETE</td>
+        <td>None</td>
+        <td>A text message indicating whether a user was successfully removed.</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+</body>
+</html>
