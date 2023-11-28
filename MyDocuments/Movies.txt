@@ -1,169 +1,184 @@
-var movie1 = {
-  Title: "Wilma",
-  Description: "The story of American track sprinter Wilma Rudolph, who overcame physical handicaps to win three gold medals in the 1960 Olympics.",
-  Genre: {
-    Name: "Drama",
-    Description: "	Focused on emotions and defined by conflict, often looking to reality rather than sensationalism."
+{
+  "Title": "Wilma",
+  "Description": "The story of American track sprinter Wilma Rudolph, who overcame physical handicaps to win three gold medals in the 1960 Olympics.",
+  "Genre": {
+    "Name": "Drama",
+    "Description": "Focused on emotions and defined by conflict, often looking to reality rather than sensationalism."
   },
-  Director: {
-    Name: "Bud Greenspan",
-    Bio: "Bud Greenspan was born on September 18, 1926 in New York City, New York, USA. He was a director and producer, known for 16 Days of Glory (1985), Bud Greenspan's Summer Olympic Greats (1988) and The Olympiad (1976). He was married to Cappy Petrash Greenspan. He died on December 25, 2010 in New York City, New York, USA.",
-    Birth: "1926",
-    Death: "2010"
+  "Director": {
+    "Name": "Bud Greenspan",
+    "Bio": "Bud Greenspan was born on September 18, 1926 in New York City, New York, USA. He was a director and producer, known for 16 Days of Glory (1985), Bud Greenspan\'s Summer Olympic Greats (1988) and The Olympiad (1976). He was married to Cappy Petrash Greenspan. He died on December 25, 2010 in New York City, New York, USA.",
+    "Birth": 1926,
+    "Death": 2010
   },
-  ImagePath: "https://www.imdb.com/title/tt0076923/mediaviewer/rm810914304/?ref_=tt_ov_i",
-  Featured: true
+  "ImagePath": "https://www.imdb.com/title/tt0076923/mediaviewer/rm810914304/?ref_=tt_ov_i",
+  "Featured": true
 }
 
-var movie2 = {
-  Title: "Flesh & Blood",
-  Description: "A convict takes up boxing in prison and this brings a new meaning to his life. Once out, his trainer motivates him to become a professional boxer. He cares about only two other things, his uncomfortably close mother and absent father.",
-  Genre: {
-    Name: "Drama",
-    Description: "Focused on emotions and defined by conflict, often looking to reality rather than sensationalism."
+
+
+{
+  "Title": "Flesh & Blood",
+  "Description": "A convict takes up boxing in prison and this brings a new meaning to his life. Once out, his trainer motivates him to become a professional boxer. He cares about only two other things, his uncomfortably close mother and absent father.",
+  "Genre": {
+    "Name": "Drama",
+    "Description": "Focused on emotions and defined by conflict, often looking to reality rather than sensationalism."
   },
-  Director: {
-    Name: "Jud Taylor",
-    Bio: "Jud Taylor was born on 25 February 1932 in New York City, New York, USA. He was a director and actor, known for The Great Escape (1963), Bob Hope Presents the Chrysler Theatre (1963) and The Fugitive (1963). He was married to Lynn Kressel and Devra Korwin. He died on 6 August 2008 in New York City, New York, USA.",
-    Birth: "1932",
-    Death: "2008"
+  "Director": {
+    "Name": "Jud Taylor",
+    "Bio": "Jud Taylor was born on 25 February 1932 in New York City, New York, USA. He was a director and actor, known for The Great Escape (1963), Bob Hope Presents the Chrysler Theatre (1963) and The Fugitive (1963). He was married to Lynn Kressel and Devra Korwin. He died on 6 August 2008 in New York City, New York, USA.",
+    "Birth": 1932,
+    "Death": 2008
   },
-  ImagePath: "https://www.imdb.com/title/tt0079161/mediaviewer/rm1179524608/?ref_=tt_ov_i",
-  Featured: true
+  "ImagePath": "https://www.imdb.com/title/tt0079161/mediaviewer/rm1179524608/?ref_=tt_ov_i",
+  "Featured": true
 }
 
-var movie3 = {
-  Title: "Coriolanus",
-  Description: "A banished hero of Rome allies with a sworn enemy to take his revenge on the city.",
-  Genre: {
-    Name: "Historical",
-    Description: "Films that either provide more-or-less accurate representations of historical accounts or depict fictional narratives placed inside an accurate depiction of a historical setting."
+
+
+{
+  "Title": "Coriolanus",
+  "Description": "A banished hero of Rome allies with a sworn enemy to take his revenge on the city.",
+  "Genre": {
+    "Name": "Historical",
+    "Description": "Films that either provide more-or-less accurate representations of historical accounts or depict fictional narratives placed inside an accurate depiction of a historical setting."
   },
-  Director: {
-    Name: "Wilford Leach",
-    Bio: "Wilford Leach was born on 26 August 1929 in Petersburg, Virginia, USA. He was a director and writer, known for The Pirates of Penzance (1983), The Wedding Party (1969) and The Pirates of Penzance (1980). He died on 18 June 1988 in Rocky Point, New York, USA.",
-    Birth: "1929",
-    Death: "1988"
+  "Director": {
+    "Name": "Wilford Leach",
+    "Bio": "Wilford Leach was born on 26 August 1929 in Petersburg, Virginia, USA. He was a director and writer, known for The Pirates of Penzance (1983), The Wedding Party (1969) and The Pirates of Penzance (1980). He died on 18 June 1988 in Rocky Point, New York, USA.",
+    "Birth": 1929,
+    "Death": 1988
   },
-  ImagePath: "https://www.imdb.com/title/tt0078999/mediaviewer/rm3949336320/?ref_=tt_ov_i",
-  Featured: true
+  "ImagePath": "https://www.imdb.com/title/tt0078999/mediaviewer/rm3949336320/?ref_=tt_ov_i",
+  "Featured": true
 }
 
-var movie4 = {
-  Title: "Carbon Copy",
-  Description: "When a rich white corporate executive finds out that he has an illegitimate black son, things start falling apart for him at home, work, and in his social circles.",
-  Genre: {
-    Name: "Comedy",
-    Description: "Defined by events that are primarily intended to make the audience laugh."
+
+{
+  "Title": "Carbon Copy",
+  "Description": "When a rich white corporate executive finds out that he has an illegitimate black son, things start falling apart for him at home, work, and in his social circles.",
+  "Genre": {
+    "Name": "Comedy",
+    "Description": "Defined by events that are primarily intended to make the audience laugh."
   },
-  Director: {
-    Name: "Michael Schultz",
-    Bio: "Michael Schultz was born in Milwaukee, Wisconsin, USA. He is a director and producer, known for Cooley High (1975), Car Wash (1976) and Krush Groove (1985). He has been married to Lauren Jones since December 6, 1965. They have two children.",
-    Birth: "1938",
-    Death: "-"
+  "Director": {
+    "Name": "Michael Schultz",
+    "Bio": "Michael Schultz was born in Milwaukee, Wisconsin, USA. He is a director and producer, known for Cooley High (1975), Car Wash (1976) and Krush Groove (1985). He has been married to Lauren Jones since December 6, 1965. They have two children.",
+    "Birth": 1938,
   },
-  ImagePath: "https://www.imdb.com/title/tt0082138/mediaviewer/rm1538916352/?ref_=tt_ov_i",
-  Featured: true
+  "ImagePath": "https://www.imdb.com/title/tt0082138/mediaviewer/rm1538916352/?ref_=tt_ov_i",
+  "Featured": true
 }
 
-var movie5 = {
-  Title: "License to Kill",
-  Description: "A grieving family whose daughter was killed in a car crash with a drunken driver is outraged and frustrated as they encounter the inevitable bureaucratic delays in bringing the case to trial. Once in the courtroom, they are horror-stricken as the young, hard-pressed district attorney seems unable to overcome the technicalities and maneuverings that the driver's attorney uses to keep his client out of jail and still on the streets as a legal driver. When the judge is forced to rule time and again in favor of the defense, it appears that the driver might escape punishment altogether.",
-  Genre: {
-    Name: "Thriller",
-    Description: "Films that evoke excitement and suspense in the audience. The suspense element found in most films' plots is particularly exploited by the filmmaker in this genre. Tension is created by delaying what the audience sees as inevitable, and is built through situations that are menacing or where escape seems impossible."
+
+
+{
+  "Title": "License to Kill",
+  "Description": "A grieving family whose daughter was killed in a car crash with a drunken driver is outraged and frustrated as they encounter the inevitable bureaucratic delays in bringing the case to trial. Once in the courtroom, they are horror-stricken as the young, hard-pressed district attorney seems unable to overcome the technicalities and maneuverings that the driver's attorney uses to keep his client out of jail and still on the streets as a legal driver. When the judge is forced to rule time and again in favor of the defense, it appears that the driver might escape punishment altogether.",
+  "Genre": {
+    "Name": "Thriller",
+    "Description": "Films that evoke excitement and suspense in the audience. The suspense element found in most films' plots is particularly exploited by the filmmaker in this genre. Tension is created by delaying what the audience sees as inevitable, and is built through situations that are menacing or where escape seems impossible."
   },
-  Director: {
-    Name: "Jud Taylor",
-    Bio: "Jud Taylor was born on 25 February 1932 in New York City, New York, USA. He was a director and actor, known for The Great Escape (1963), Bob Hope Presents the Chrysler Theatre (1963) and The Fugitive (1963). He was married to Lynn Kressel and Devra Korwin. He died on 6 August 2008 in New York City, New York, USA.",
-    Birth: "1932",
-    Death: "2008"
+  "Director": {
+    "Name": "Jud Taylor",
+    "Bio": "Jud Taylor was born on 25 February 1932 in New York City, New York, USA. He was a director and actor, known for The Great Escape (1963), Bob Hope Presents the Chrysler Theatre (1963) and The Fugitive (1963). He was married to Lynn Kressel and Devra Korwin. He died on 6 August 2008 in New York City, New York, USA.",
+    "Birth": 1932,
+    "Death": 2008
   },
-  ImagePath: "https://www.imdb.com/title/tt0087617/mediaviewer/rm1762119425/?ref_=tt_ov_i",
-  Featured: true
+  "ImagePath": "https://www.imdb.com/title/tt0087617/mediaviewer/rm1762119425/?ref_=tt_ov_i",
+  "Featured": true
 }
 
-var movie6 = {
-  Title: "A Soldier's Story",
-  Description: "An African-American officer investigates a murder in a racially charged situation in World War II.",
-  Genre: {
-    Name: "Drama",
-    Description: "Focused on emotions and defined by conflict, often looking to reality rather than sensationalism."
+
+
+{
+  "Title": "A Soldier's Story",
+  "Description": "An African-American officer investigates a murder in a racially charged situation in World War II.",
+  "Genre": {
+    "Name": "Drama",
+    "Description": "Focused on emotions and defined by conflict, often looking to reality rather than sensationalism."
   },
-  Director: {
-    Name: "Norman Jewison",
-    Bio: "Norman Jewison is an award-winning, internationally acclaimed filmmaker who has produced and directed some of the world's most memorable, entertaining and socially important films, exploring controversial and complicated subjects and giving them a universal accessibility.",
-    Birth: "1926",
-    Death: "-"
+  "Director": {
+    "Name": "Norman Jewison",
+    "Bio": "Norman Jewison is an award-winning, internationally acclaimed filmmaker who has produced and directed some of the world's most memorable, entertaining and socially important films, exploring controversial and complicated subjects and giving them a universal accessibility.",
+    "Birth": 1926
   },
-  ImagePath: "https://www.imdb.com/title/tt0088146/mediaviewer/rm2509120001/?ref_=tt_ov_i",
-  Featured: true
+  "ImagePath": "https://www.imdb.com/title/tt0088146/mediaviewer/rm2509120001/?ref_=tt_ov_i",
+  "Featured": true
 }
 
-var movie7 = {
-  Title: "Power",
-  Description: "After a close friend drops out of politics, a political consultant helping to find a replacement finds a web of corruption and deceit as well.",
-  Genre: {
-    Name: "Drama",
-    Description: "Focused on emotions and defined by conflict, often looking to reality rather than sensationalism."
+
+
+{
+  "Title": "Power",
+  "Description": "After a close friend drops out of politics, a political consultant helping to find a replacement finds a web of corruption and deceit as well.",
+  "Genre": {
+    "Name": "Drama",
+    "Description": "Focused on emotions and defined by conflict, often looking to reality rather than sensationalism."
   },
-  Director: {
-    Name: "Sidney Lumet",
-    Bio: "Sidney Lumet was a master of cinema, best known for his technical knowledge and his skill at getting first-rate performances from his actors -- and for shooting most of his films in his beloved New York.",
-    Birth: "1924",
-    Death: "2011"
+  "Director": {
+    "Name": "Sidney Lumet",
+    "Bio": "Sidney Lumet was a master of cinema, best known for his technical knowledge and his skill at getting first-rate performances from his actors -- and for shooting most of his films in his beloved New York.",
+    "Birth": "1924",
+    "Death": "2011"
   },
-  ImagePath: "https://www.imdb.com/title/tt0091786/mediaviewer/rm474831872/?ref_=tt_ov_i",
-  Featured: true
+  "ImagePath": "https://www.imdb.com/title/tt0091786/mediaviewer/rm474831872/?ref_=tt_ov_i",
+  "Featured": true
 }
 
-var movie8 = {
-  Title: "The George McKenna Story",
-  Description: "He risked it all to make the grade.",
-  Genre: {
-    Name: "Drama",
-    Description: "Focused on emotions and defined by conflict, often looking to reality rather than sensationalism."
+
+
+{
+  "Title": "The George McKenna Story",
+  "Description": "He risked it all to make the grade.",
+  "Genre": {
+    "Name": "Drama",
+    "Description": "Focused on emotions and defined by conflict, often looking to reality rather than sensationalism."
   },
-  Director: {
-    Name: "Eric Laneuville",
-    Bio: "Eric Laneuville was born on 14 July 1952 in New Orleans, Louisiana, USA. He is a director and actor, known for I'll Fly Away (1991), Lost (2004) and The Omega Man (1971).",
-    Birth: "1952",
-    Death: "-"
+  "Director": {
+    "Name": "Eric Laneuville",
+    "Bio": "Eric Laneuville was born on 14 July 1952 in New Orleans, Louisiana, USA. He is a director and actor, known for I'll Fly Away (1991), Lost (2004) and The Omega Man (1971).",
+    "Birth": 1952
   },
-  ImagePath: "https://www.imdb.com/title/tt0091106/mediaviewer/rm3185220608/?ref_=tt_ov_i",
-  Featured: true
+  "ImagePath": "https://www.imdb.com/title/tt0091106/mediaviewer/rm3185220608/?ref_=tt_ov_i",
+  "Featured": true
 }
 
-var movie9 = {
-  Title: "Cry Freedom",
-  Description: "South African journalist Donald Woods is forced to flee the country after attempting to investigate the death in custody of his friend, the Black anti-Apartheid activist Steve Biko.",
-  Genre: {
-    Name: "Historical",
-    Description: "Films that either provide more-or-less accurate representations of historical accounts or depict fictional narratives placed inside an accurate depiction of a historical setting."
+
+
+{
+  "Title": "Cry Freedom",
+  "Description": "South African journalist Donald Woods is forced to flee the country after attempting to investigate the death in custody of his friend, the Black anti-Apartheid activist Steve Biko.",
+  "Genre": {
+    "Name": "Historical",
+    "Description": "Films that either provide more-or-less accurate representations of historical accounts or depict fictional narratives placed inside an accurate depiction of a historical setting."
   },
-  Director: {
-    Name: "Richard Attenborough",
-    Bio: "Richard Attenborough, Baron Attenborough of Richmond-upon-Thames, was born in Cambridge, England, the son of Mary (née Clegg), a founding member of the Marriage Guidance Council, and Frederick Levi Attenborough, a scholar and academic administrator who was a don at Emmanuel College and wrote a standard text on Anglo-Saxon law.",
-    Birth: "1923",
-    Death: "2014"
+  "Director": {
+    "Name": "Richard Attenborough",
+    "Bio": "Richard Attenborough, Baron Attenborough of Richmond-upon-Thames, was born in Cambridge, England, the son of Mary (née Clegg), a founding member of the Marriage Guidance Council, and Frederick Levi Attenborough, a scholar and academic administrator who was a don at Emmanuel College and wrote a standard text on Anglo-Saxon law.",
+    "Birth": 1923,
+    "Death": 2014
   },
-  ImagePath: "https://www.imdb.com/title/tt0092804/mediaviewer/rm1025589248/?ref_=tt_ov_i",
-  Featured: true
+  "ImagePath": "https://www.imdb.com/title/tt0092804/mediaviewer/rm1025589248/?ref_=tt_ov_i",
+  "Featured": true
 }
 
-var movie10 = {
-  Title: "",
-  Description: "",
-  Genre: {
-    Name: "",
-    Description: ""
+
+
+{
+  "Title": "For Queen & Country",
+  "Description": "A retired British soldier struggles to adjust to everyday life, with increasing difficulty.",
+  "Genre": {
+    "Name": "Action",
+    "Description": "Associated with particular types of spectacle (e.g., explosions, chases, combat)"
   },
-  Director: {
-    Name: "",
-    Bio: "",
-    Birth: "",
-    Death: ""
+  "Director": {
+    "Name": "Martin Stellman",
+    "Bio": "Martin Stellman was born on 28 July 1948 in Marylebone, London, England, UK. He is a writer and director, known for For Queen & Country (1988), The Interpreter (2005) and Defense of the Realm (1985).",
+    "Birth": 1948
   },
-  ImagePath: "",
-  Featured: true
+  "ImagePath": "https://www.imdb.com/title/tt0097373/mediaviewer/rm2336145409/?ref_=tt_ov_i",
+  "Featured": true
 }
+
+
