@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 //(READ) - mongoose it works
 
 app.get('/movies', async (req, res) => {
-  Movies.find()
+  await Movies.find()
     .then((movies) => {
       res.status(201).json(movies);
     })
@@ -34,7 +34,7 @@ app.get('/movies', async (req, res) => {
 //(READ) - mongoose - it works
 
 app.get('/movies/:Title', async (req, res) => {
-  Movies.findOne({ Title: req.params.Title })
+  await Movies.findOne({ Title: req.params.Title })
     .then((movie) => {
       res.json(movie);
     })
@@ -48,30 +48,31 @@ app.get('/movies/:Title', async (req, res) => {
 
 //(READ) - mongoose
 
-app.get('/movies/genres/:genreName',(req, res) => {
-    Movies.find({ 'Genre.Name': req.params.Genre })
+
+app.get('/movies/genre/:genreName', async (req, res) => {
+  await Movies.findOne({ "Genre.Name": req.params.genreName })
       .then((movie) => {
-        res.status(200).json(Description);
+          res.status(200).json(movie.Genre);
       })
       .catch((err) => {
-        res.status(500).send('Error: ' + err);
+          res.status(500).send('Error ', err);
       });
-  }
-);
+});
 
 //Return data about a director (bio, birth year, death year) by name
 
 //(READ) - mongoose - it works
-app.get('/movies/directors/:directorsName',(req, res) => {
-    Movies.find({ 'Director.Name': req.params.directorsName })
-      .then((movies) => {
-        res.status(200).json(movies);
+app.get('/movies/director/:directorName', async (req, res) => {
+    await Movies.findOne({ 'Director.Name': req.params.directorName })
+      .then((movie) => {
+        res.status(200).json(movie.Director);
       })
       .catch((err) => {
         res.status(500).send('Error: ' + err);
       });
   }
 );
+
 
 //Allow new users to register
 
@@ -194,8 +195,8 @@ app.post('/users/:Username/movies/:MovieID', async (req, res) => {
 
 //mongoose - it works 
 
-app.post('/users/:Username/movies/:MovieID', (req, res) => {
-  Users.findOneAndUpdate(
+app.post('/users/:Username/movies/:MovieID', async (req, res) => {
+  await Users.findOneAndUpdate(
     { Username: req.params.Username },
     { $push: { FavoriteMovies: req.params.MovieID } },
     { new: true }
@@ -216,8 +217,8 @@ app.post('/users/:Username/movies/:MovieID', (req, res) => {
 
 //mongoose - it works
 
-app.delete('/users/:Username/movies/:MovieID', (req, res) => {
-  Users.findOneAndUpdate(
+app.delete('/users/:Username/movies/:MovieID', async (req, res) => {
+  await Users.findOneAndUpdate(
     { Username: req.params.Username },
     { $pull: { FavoriteMovies: req.params.MovieID } },
     { new: true }
@@ -236,8 +237,8 @@ app.delete('/users/:Username/movies/:MovieID', (req, res) => {
 
 //DELETE
 
-app.delete('/users/:Username', (req, res) => {
-  Users.findOneAndRemove({ Username: req.params.Username })
+app.delete('/users/:Username', async (req, res) => {
+ await Users.findOneAndDelete({ Username: req.params.Username })
     .then((user) => {
       if (!user) {
         res.status(400).send(req.params.Username + ' was not found');
