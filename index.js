@@ -13,12 +13,16 @@ const express = require('express');
 
 app.use(bodyParser.json());
 
+let auth = require('./auth')(app);
+
+const passport = require('passport');
+require('./passport');
 
 //Return a list of ALL movies to the user 
 
 //(READ) - mongoose it works
 
-app.get('/movies', async (req, res) => {
+app.get('/movies', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Movies.find()
     .then((movies) => {
       res.status(201).json(movies);
@@ -33,7 +37,7 @@ app.get('/movies', async (req, res) => {
 
 //(READ) - mongoose - it works
 
-app.get('/movies/:Title', async (req, res) => {
+app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Movies.findOne({ Title: req.params.Title })
     .then((movie) => {
       res.json(movie);
@@ -49,7 +53,7 @@ app.get('/movies/:Title', async (req, res) => {
 //(READ) - mongoose
 
 
-app.get('/movies/genre/:genreName', async (req, res) => {
+app.get('/movies/genre/:genreName', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Movies.findOne({ "Genre.Name": req.params.genreName })
       .then((movie) => {
           res.status(200).json(movie.Genre);
@@ -62,7 +66,7 @@ app.get('/movies/genre/:genreName', async (req, res) => {
 //Return data about a director (bio, birth year, death year) by name
 
 //(READ) - mongoose - it works
-app.get('/movies/director/:directorName', async (req, res) => {
+app.get('/movies/director/:directorName', passport.authenticate('jwt', { session: false }), async (req, res) => {
     await Movies.findOne({ 'Director.Name': req.params.directorName })
       .then((movie) => {
         res.status(200).json(movie.Director);
@@ -88,7 +92,7 @@ app.get('/movies/director/:directorName', async (req, res) => {
   Birthday: Date
 }*/
 
-app.post('/users', async (req, res) => {
+app.post('/users', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
@@ -115,7 +119,7 @@ app.post('/users', async (req, res) => {
 });
 
 // Get all users - mongoose - it works
-app.get('/users', async (req, res) => {
+app.get('/users', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.find()
     .then((users) => {
       res.status(201).json(users);
@@ -127,7 +131,7 @@ app.get('/users', async (req, res) => {
 });
 
 // Get a user by username - mongoose - it works
-app.get('/users/:Username', async (req, res) => {
+app.get('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.findOne({ Username: req.params.Username })
     .then((user) => {
       res.json(user);
@@ -153,7 +157,7 @@ app.get('/users/:Username', async (req, res) => {
   (required)
   Birthday: Date
 }*/
-app.put('/users/:Username', async (req, res) => {
+app.put('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
     {
       Username: req.body.Username,
@@ -174,7 +178,7 @@ app.put('/users/:Username', async (req, res) => {
 });
 
 // Add a movie to a user's list of favorites - mongoose - it works
-app.post('/users/:Username/movies/:MovieID', async (req, res) => {
+app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.findOneAndUpdate({ Username: req.params.Username }, {
      $push: { FavoriteMovies: req.params.MovieID }
    },
@@ -195,7 +199,7 @@ app.post('/users/:Username/movies/:MovieID', async (req, res) => {
 
 //mongoose - it works 
 
-app.post('/users/:Username/movies/:MovieID', async (req, res) => {
+app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.findOneAndUpdate(
     { Username: req.params.Username },
     { $push: { FavoriteMovies: req.params.MovieID } },
@@ -217,7 +221,7 @@ app.post('/users/:Username/movies/:MovieID', async (req, res) => {
 
 //mongoose - it works
 
-app.delete('/users/:Username/movies/:MovieID', async (req, res) => {
+app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.findOneAndUpdate(
     { Username: req.params.Username },
     { $pull: { FavoriteMovies: req.params.MovieID } },
@@ -237,7 +241,7 @@ app.delete('/users/:Username/movies/:MovieID', async (req, res) => {
 
 //DELETE
 
-app.delete('/users/:Username', async (req, res) => {
+app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
  await Users.findOneAndDelete({ Username: req.params.Username })
     .then((user) => {
       if (!user) {
