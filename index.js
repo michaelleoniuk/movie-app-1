@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Models = require('./models.js');
-
 const Movies = Models.Movie;
 const Users = Models.User;
 
@@ -20,8 +19,6 @@ require('./passport');
 
 //Return a list of ALL movies to the user 
 
-//(READ) - mongoose it works
-
 app.get('/movies', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Movies.find()
     .then((movies) => {
@@ -34,8 +31,6 @@ app.get('/movies', passport.authenticate('jwt', { session: false }), async (req,
 });
 
 //Return data (description, genre, director, image URL, whether it is featured or not) about a single movie by title to the user
-
-//(READ) - mongoose - it works
 
 app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Movies.findOne({ Title: req.params.Title })
@@ -50,9 +45,6 @@ app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), asyn
 
 //Return data about a genre (description) by name/title (e.g., “Thriller”)
 
-//(READ) - mongoose
-
-
 app.get('/movies/genre/:genreName', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Movies.findOne({ "Genre.Name": req.params.genreName })
       .then((movie) => {
@@ -65,7 +57,6 @@ app.get('/movies/genre/:genreName', passport.authenticate('jwt', { session: fals
 
 //Return data about a director (bio, birth year, death year) by name
 
-//(READ) - mongoose - it works
 app.get('/movies/director/:directorName', passport.authenticate('jwt', { session: false }), async (req, res) => {
     await Movies.findOne({ 'Director.Name': req.params.directorName })
       .then((movie) => {
@@ -77,12 +68,8 @@ app.get('/movies/director/:directorName', passport.authenticate('jwt', { session
   }
 );
 
-
 //Allow new users to register
 
-//CREATE
-
-//Add a user - mongoose - it works
 /* We’ll expect JSON in this format
 {
   ID: Integer,
@@ -92,7 +79,7 @@ app.get('/movies/director/:directorName', passport.authenticate('jwt', { session
   Birthday: Date
 }*/
 
-app.post('/users', passport.authenticate('jwt', { session: false }), async (req, res) => {
+app.post('/users', async (req, res) => {
   await Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
@@ -118,7 +105,8 @@ app.post('/users', passport.authenticate('jwt', { session: false }), async (req,
     });
 });
 
-// Get all users - mongoose - it works
+// Get all users
+
 app.get('/users', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.find()
     .then((users) => {
@@ -130,7 +118,8 @@ app.get('/users', passport.authenticate('jwt', { session: false }), async (req, 
     });
 });
 
-// Get a user by username - mongoose - it works
+// Get a user by username
+
 app.get('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.findOne({ Username: req.params.Username })
     .then((user) => {
@@ -144,9 +133,6 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), as
 
 //Allow users to update their user info (username)
 
-// mongoose - it works
-
-// Update a user's info, by username - mongoose
 /* We’ll expect JSON in this format
 {
   Username: String,
@@ -157,6 +143,7 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), as
   (required)
   Birthday: Date
 }*/
+
 app.put('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
     {
@@ -174,30 +161,9 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), as
     console.error(err);
     res.status(500).send('Error: ' + err);
   })
-
 });
-
-// Add a movie to a user's list of favorites - mongoose - it works
-app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
-  await Users.findOneAndUpdate({ Username: req.params.Username }, {
-     $push: { FavoriteMovies: req.params.MovieID }
-   },
-   { new: true }) // This line makes sure that the updated document is returned
-  .then((updatedUser) => {
-    res.json(updatedUser);
-  })
-  .catch((err) => {
-    console.error(err);
-    res.status(500).send('Error: ' + err);
-  });
-});
-
 
 //Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)
-
-//CREATE
-
-//mongoose - it works 
 
 app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.findOneAndUpdate(
@@ -214,12 +180,7 @@ app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { sess
     });
 });
 
-
 //Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)
-
-//DELETE
-
-//mongoose - it works
 
 app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.findOneAndUpdate(
@@ -236,10 +197,7 @@ app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { se
     });
 });
 
-
 //Allow existing users to deregister (showing only a text that a user email has been removed—more on this later)
-
-//DELETE
 
 app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
  await Users.findOneAndDelete({ Username: req.params.Username })
@@ -278,12 +236,9 @@ app.get('/', (req, res) => {
   res.send(responseText);
 });
 
-
 app.get('/documentation', (req, res) => {                  
   res.sendFile('public/documentation.html', { root: __dirname });
 });
-
-
 
 app.listen(8080, () => {
   console.log('Your app is listening on port 8080.');
