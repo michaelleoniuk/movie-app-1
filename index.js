@@ -3,14 +3,14 @@ const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
+const { check, validationResult } = require('express-validator');  
+
 mongoose.connect('mongodb://localhost:27017/myFlix', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const express = require('express');
   app = express();
   bodyParser = require('body-parser');
   uuid = require('uuid');
-
-const { check, validationResult } = require('express-validator');  
 
 app.use(bodyParser.json());
 
