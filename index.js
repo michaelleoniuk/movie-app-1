@@ -171,29 +171,46 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), as
   Birthday: Date
 }*/
 
-app.put('/users/:Username', passport.authenticate('jwt', { session: false }),   
-[
-  check('Username', 'Username is required').isLength({min: 5}),
-  check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
-  check('Password', 'Password is required').not().isEmpty(),
-  check('Email', 'Email does not appear to be valid').isEmail()
+app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
+  check('Username', 'Username is required').notEmpty(),
+  check('Password', 'Password is required').notEmpty(),
+  check('Password', 'Password must be at least 8 characters').isLength({ min: 8 }),
+  check('Email', 'Invalid email').isEmail(),
+  check('Birthday', 'Birthday is required').notEmpty(),
 ], async (req, res) => {
-  await Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
-    {
-      Username: req.body.Username,
-      Password: req.body.Password,
-      Email: req.body.Email,
-      Birthday: req.body.Birthday
-    }
-  },
-  { new: true }) // This line makes sure that the updated document is returned
-  .then((updatedUser) => {
-    res.json(updatedUser);
-  })
-  .catch((err) => {
-    console.error(err);
-    res.status(500).send('Error: ' + err);
-  })
+  
+  if (req.user.Username !== req.params.Username) {
+      return res.status(400).send('Permission denied');
+  }
+
+  // Validate input
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+      // Hash the new password
+      const hashedPassword = await bcrypt.hash(req.body.Password, 10); // Adjust the salt rounds as needed
+
+      const updatedUser = await Users.findOneAndUpdate(
+          { Username: req.params.Username },
+          {
+              $set: {
+                  Username: req.body.Username,
+                  Password: hashedPassword, // Store the hashed password in the database
+                  Email: req.body.Email,
+                  Birthday: req.body.Birthday,
+              },
+          },
+          { new: true } // No need to exclude Password and __v, as they will be included in the response
+      );
+
+      res.json(updatedUser);
+  } catch (err) {
+      console.log(err);
+      res.status(500).send('Error: ' + err);
+  }
 });
 
 //Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)
