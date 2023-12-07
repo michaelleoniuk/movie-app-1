@@ -6,7 +6,6 @@ const Users = Models.User;
 const { check, validationResult } = require('express-validator');  
 
 //mongoose.connect('mongodb://localhost:27017/dbname', { useNewUrlParser: true, useUnifiedTopology: true });
-//mongoose.connect('mongodb+srv://michaelleoniuk:montgoaytlyas678@mongoczo.goepl2m.mongodb.net/myFlixDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const express = require('express');
@@ -19,7 +18,7 @@ app.use(bodyParser.json());
 const cors = require('cors');
 app.use(cors());
 
-let auth = require('./auth')(app);
+require('./auth')(app);
 
 const passport = require('passport');
 require('./passport');
