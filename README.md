@@ -63,7 +63,8 @@ single movie by title to the user
 - Allow users to remove a movie from their list of favorites
 - Allow existing users to deregister
 
-  **Technical Requirements**
+
+**Technical Requirements**
 - The API must be a **Node.js** and **Express** application.
 - The API must use **REST architecture**, with **URL endpoints** corresponding to the data
 operations listed above
