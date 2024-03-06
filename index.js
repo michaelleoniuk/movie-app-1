@@ -3,10 +3,8 @@ var bcrypt = require('bcryptjs');
 const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
-
 const { check, validationResult } = require('express-validator');  
 
-//mongoose.connect('mongodb://localhost:27017/dbname', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const express = require('express');
@@ -24,8 +22,6 @@ require('./auth')(app);
 const passport = require('passport');
 require('./passport');
 
-//Return a list of ALL movies to the user 
-
 app.get('/movies', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Movies.find()
     .then((movies) => {
@@ -36,8 +32,6 @@ app.get('/movies', passport.authenticate('jwt', { session: false }), async (req,
       res.status(500).send('Error: ' + err);
     });
 });
-
-//Return data (description, genre, director, image URL, whether it is featured or not) about a single movie by title to the user
 
 app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Movies.findOne({ Title: req.params.Title })
@@ -50,8 +44,6 @@ app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), asyn
     });
 });
 
-//Return data about a genre (description) by name/title (e.g., “Thriller”)
-
 app.get('/movies/genre/:genreName', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Movies.findOne({ "Genre.Name": req.params.genreName })
       .then((movie) => {
@@ -61,8 +53,6 @@ app.get('/movies/genre/:genreName', passport.authenticate('jwt', { session: fals
           res.status(500).send('Error ', err);
       });
 });
-
-//Return data about a director (bio, birth year, death year) by name
 
 app.get('/movies/director/:directorName', passport.authenticate('jwt', { session: false }), async (req, res) => {
     await Movies.findOne({ 'Director.Name': req.params.directorName })
@@ -75,31 +65,13 @@ app.get('/movies/director/:directorName', passport.authenticate('jwt', { session
   }
 );
 
-//Allow new users to register
-
-/* We’ll expect JSON in this format
-{
-  ID: Integer,
-  Username: String,
-  Password: String,
-  Email: String,
-  Birthday: Date
-}*/
-
-app.post('/users',
-  // Validation logic here for request
-  //you can either use a chain of methods like .not().isEmpty()
-  //which means "opposite of isEmpty" in plain english "is not empty"
-  //or use .isLength({min: 5}) which means
-  //minimum value of 5 characters are only allowed
-  [
+app.post('/users',[
     check('Username', 'Username is required').isLength({min: 5}),
     check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
     check('Password', 'Password is required').not().isEmpty(),
     check('Email', 'Email does not appear to be valid').isEmail()
   ], async (req, res) => {
 
-  // check the validation object for errors
     let errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -107,10 +79,9 @@ app.post('/users',
     }
 
     let hashedPassword = Users.hashPassword(req.body.Password);
-    await Users.findOne({ Username: req.body.Username }) // Search to see if a user with the requested username already exists
+    await Users.findOne({ Username: req.body.Username })
       .then((user) => {
         if (user) {
-          //If the user is found, send a response that it already exists
           return res.status(400).send(req.body.Username + ' already exists');
         } else {
           Users
@@ -133,8 +104,6 @@ app.post('/users',
       });
   });
 
-// Get all users
-
 app.get('/users', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.find()
     .then((users) => {
@@ -145,8 +114,6 @@ app.get('/users', passport.authenticate('jwt', { session: false }), async (req, 
       res.status(500).send('Error: ' + err);
     });
 });
-
-// Get a user by username
 
 app.get('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.findOne({ Username: req.params.Username })
@@ -159,19 +126,6 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), as
     });
 });
 
-//Allow users to update their user info (username)
-
-/* We’ll expect JSON in this format
-{
-  Username: String,
-  (required)
-  Password: String,
-  (required)
-  Email: String,
-  (required)
-  Birthday: Date
-}*/
-
 app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
   check('Username', 'Username is required').notEmpty(),
   check('Password', 'Password is required').notEmpty(),
@@ -183,28 +137,25 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
   if (req.user.Username !== req.params.Username) {
       return res.status(400).send('Permission denied');
   }
-
-  // Validate input
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
   }
 
   try {
-      // Hash the new password
-      const hashedPassword = await bcrypt.hash(req.body.Password, 10); // Adjust the salt rounds as needed
+      const hashedPassword = await bcrypt.hash(req.body.Password, 10);
 
       const updatedUser = await Users.findOneAndUpdate(
           { Username: req.params.Username },
           {
               $set: {
                   Username: req.body.Username,
-                  Password: hashedPassword, // Store the hashed password in the database
+                  Password: hashedPassword,
                   Email: req.body.Email,
                   Birthday: req.body.Birthday,
               },
           },
-          { new: true } // No need to exclude Password and __v, as they will be included in the response
+          { new: true }
       );
 
       res.json(updatedUser);
@@ -213,8 +164,6 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
       res.status(500).send('Error: ' + err);
   }
 });
-
-//Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)
 
 app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.findOneAndUpdate(
@@ -231,8 +180,6 @@ app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { sess
     });
 });
 
-//Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)
-
 app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
   await Users.findOneAndUpdate(
     { Username: req.params.Username },
@@ -247,8 +194,6 @@ app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { se
       res.status(500).send('Error: ' + err);
     });
 });
-
-//Allow existing users to deregister (showing only a text that a user email has been removed—more on this later)
 
 app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
  await Users.findOneAndDelete({ Username: req.params.Username })
